@@ -27,7 +27,6 @@ namespace APICafeteria.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-#pragma warning disable CS8604 
                 optionsBuilder.UseSqlServer("Server=localhost;Database=CafeteriaDB;user=JEREMIAS-APEC;password='';Trusted_Connection=true");
             }
         }
@@ -36,20 +35,12 @@ namespace APICafeteria.Models
         {
             modelBuilder.Entity<Articulo>(entity =>
             {
-                entity.Property(e => e.Descripcion)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.HasNoKey();
 
-                entity.Property(e => e.Disponibles)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
-                entity.Property(e => e.Estado)
-                    .HasMaxLength(25)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Marca)
-                    .HasMaxLength(30)
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
             });
 
