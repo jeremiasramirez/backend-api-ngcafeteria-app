@@ -14,7 +14,7 @@ namespace APICafeteria.Controllers
         // GET: category
         [Route("allcategory")]
         [HttpGet]
-        public IEnumerable<Models.Categoria> GetCategory()
+        public IEnumerable<Models.Articulos> GetCategory()
         {
             using (var db = new Models.CafeteriaDBContext())
             {
@@ -33,7 +33,7 @@ namespace APICafeteria.Controllers
         {
 
             var db = new Models.CafeteriaDBContext();
-            var entity = new Categoria()
+            var entity = new Articulos()
             {
                 Nombre = name
             };
@@ -42,6 +42,22 @@ namespace APICafeteria.Controllers
             db.Categorias.Add(entity);
 #pragma warning restore format
             await db.SaveChangesAsync();
+        }
+
+
+        // GET: category
+        [Route("allarticle")]
+        [HttpGet]
+        public IEnumerable<Models.Articulo> GetArticles()
+        {
+            using (var db = new Models.CafeteriaDBContext())
+            {
+
+                var results = db.Articulos.ToList();
+                return results;
+
+            }
+
         }
 
 
