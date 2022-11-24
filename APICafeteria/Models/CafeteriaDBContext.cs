@@ -17,7 +17,7 @@ namespace APICafeteria.Models
         }
 
         public virtual DbSet<Articulo> Articulos { get; set; } = null!;
-        public virtual DbSet<Articulos> Categorias { get; set; } = null!;
+        public virtual DbSet<Categoria> Categorias { get; set; } = null!;
         public virtual DbSet<Cliente> Clientes { get; set; } = null!;
         public virtual DbSet<Empleado> Empleados { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
@@ -35,16 +35,12 @@ namespace APICafeteria.Models
         {
             modelBuilder.Entity<Articulo>(entity =>
             {
-                entity.HasNoKey();
-
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(100)
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Articulos>(entity =>
+            modelBuilder.Entity<Categoria>(entity =>
             {
                 entity.Property(e => e.Nombre)
                     .HasMaxLength(100)

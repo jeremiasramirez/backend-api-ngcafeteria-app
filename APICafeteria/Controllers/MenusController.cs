@@ -14,13 +14,13 @@ namespace APICafeteria.Controllers
         // GET: category
         [Route("allcategory")]
         [HttpGet]
-        public IEnumerable<Models.Articulos> GetCategory()
+        public IEnumerable<Models.Categoria> GetCategory()
         {
             using (var db = new Models.CafeteriaDBContext())
             {
 
                 var results = db.Categorias.ToList();
-                return results;
+                return (IEnumerable<Categoria>)results;
 
             }
 
@@ -33,7 +33,7 @@ namespace APICafeteria.Controllers
         {
 
             var db = new Models.CafeteriaDBContext();
-            var entity = new Articulos()
+            var entity = new Categoria()
             {
                 Nombre = name
             };
@@ -60,6 +60,27 @@ namespace APICafeteria.Controllers
 
         }
 
+
+        [Route("newplate")]
+        [HttpPost]
+        //add plate
+        public async Task SetNewArticle(string name,int cantidad,float precio,int idCategoria)
+        {
+
+            var db = new Models.CafeteriaDBContext();
+            var entity = new Articulo()
+            {
+                Nombre = name,
+                Cantidad= cantidad,
+                Precio =precio,
+                IdCategoria =idCategoria 
+            };
+
+            db.Articulos.Add(entity);
+            await db.SaveChangesAsync();
+
+
+        }
 
 
     }
