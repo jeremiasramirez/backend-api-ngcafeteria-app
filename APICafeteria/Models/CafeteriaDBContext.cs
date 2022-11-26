@@ -20,6 +20,7 @@ namespace APICafeteria.Models
         public virtual DbSet<Categoria> Categorias { get; set; } = null!;
         public virtual DbSet<Cliente> Clientes { get; set; } = null!;
         public virtual DbSet<Empleado> Empleados { get; set; } = null!;
+        public virtual DbSet<Facturacion> Facturacions { get; set; } = null!;
         public virtual DbSet<Usuario> Usuarios { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -100,6 +101,19 @@ namespace APICafeteria.Models
 
                 entity.Property(e => e.Tanda)
                     .HasMaxLength(20)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Facturacion>(entity =>
+            {
+                entity.ToTable("Facturacion");
+
+                entity.Property(e => e.NombreCliente)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NombreProducto)
+                    .HasMaxLength(130)
                     .IsUnicode(false);
             });
 
