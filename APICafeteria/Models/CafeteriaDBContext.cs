@@ -108,12 +108,17 @@ namespace APICafeteria.Models
             {
                 entity.ToTable("Facturacion");
 
+                entity.Property(e => e.Estado)
+                    .HasMaxLength(2)
+                    .IsUnicode(false)
+                    .IsFixedLength();
+
                 entity.Property(e => e.NombreCliente)
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
                 entity.Property(e => e.NombreProducto)
-                    .HasMaxLength(130)
+                    .HasMaxLength(100)
                     .IsUnicode(false);
             });
 

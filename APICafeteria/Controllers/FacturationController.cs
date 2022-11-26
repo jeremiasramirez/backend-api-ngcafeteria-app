@@ -1,13 +1,48 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+﻿using APICafeteria.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace APICafeteria.Controllers
 {
-    [Route("facturation]")]
+    [Route("facturation")]
     [ApiController]
     public class FacturationController : ControllerBase
     {
-        
+
+
+        // GET: facturacions
+        [Route("all")]
+        [HttpGet]
+        public IEnumerable<Models.Facturacion> GetAllFacturacion()
+        {
+            using (var db = new Models.CafeteriaDBContext())
+            {
+                var results = db.Facturacions.ToList();
+                return  results;
+            }
+
+        }
+
+        [HttpPost]
+        [Route("new")]
+        public async Task SetFacturation(string name, string productname, int cantidad,float subtotal,float total,string estado)
+        {
+ 
+            var db = new Models.CafeteriaDBContext();
+            var entity = new Facturacion()
+            {
+                NombreCliente = name,
+                NombreProducto = productname,
+                Cantidad = cantidad,
+                Subtotal = subtotal,
+                Total = total,
+                Estado=estado
+            };
+
+            db.Facturacions.Add(entity);
+            await db.SaveChangesAsync();
+
+            
+        }
+
     }
 }
