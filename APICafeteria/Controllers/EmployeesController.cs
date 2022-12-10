@@ -17,7 +17,7 @@ namespace APICafeteria.Controllers
             using (var db = new Models.CafeteriaDBContext())
             {
 
-                var results = db.Empleados.ToList();
+                var results = db.Empleados.Where((e)=>e.Estado == "Activo").ToList();
                 return results;
 
             }

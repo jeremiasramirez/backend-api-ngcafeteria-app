@@ -44,5 +44,25 @@ namespace APICafeteria.Controllers
             
         }
 
+
+        [HttpPost]
+        [Route("update")]
+        public async Task UpdateFacturation(int id, string status)
+        {
+
+            using (var db = new Models.CafeteriaDBContext())
+            {
+                var addclient = db.Facturacions.Where(e => e.Id == id).FirstOrDefault();
+
+#pragma warning disable CS8602 // Desreferencia de una referencia posiblemente NULL.
+                addclient.Estado=status;
+#pragma warning restore CS8602 // Desreferencia de una referencia posiblemente NULL.
+                 
+                db.SaveChanges();
+            }
+
+
+
+        }
     }
 }
